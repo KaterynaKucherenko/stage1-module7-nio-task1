@@ -1,6 +1,7 @@
 package com.epam.mjc.nio;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.nio.file.Files;
 
 
@@ -9,9 +10,10 @@ public class FileReader {
 
 
     public Profile getDataFromFile(File file){
-            try {
+
+            try (FileInputStream n = new FileInputStream(file)){
                 Files.readAllLines(file.toPath());
-                String [] volume = Files.readString(file.toPath()).split(": |\n");
+            String [] volume = Files.readString(file.toPath()).split(": |\n");
                 String name1 = volume[1];
                 int age1 = Integer.parseInt(volume[3]);
                 String mail1 = volume[5];
@@ -20,6 +22,7 @@ public class FileReader {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
 
 
         return new Profile();}}
